@@ -7,9 +7,14 @@ class GildedRose
   def update_quality()
 # REMEMBER TO ADD IN NEW REQUIREMENTS
 
+
+
+
     # If the item is not Brie, Backstage passes or Sulfuras and the quality is greater than zero
     # then item quality decreases by one.
     @items.each do |item|
+
+      normal_items(item)
       if item.name != "Aged Brie" && item.name != "Backstage passes to a TAFKAL80ETC concert"
         if item.quality > 0
           if item.name != "Sulfuras, Hand of Ragnaros"
@@ -35,10 +40,17 @@ class GildedRose
           end
         end
       end
+
+
+
+
+
       # the sell_in number for all items decreases by one except for sulfuras
-      if item.name != "Sulfuras, Hand of Ragnaros"
-        item.sell_in = item.sell_in - 1
-      end
+
+
+
+
+
       # after the sell_in, the items quality decreases twice as fast except for Brie, backstage passes and sulfuras
       if item.sell_in < 0
         if item.name != "Aged Brie"
@@ -58,10 +70,30 @@ class GildedRose
             item.quality = item.quality + 1
           end
         end
+
+
+
+
+
       end
+
+
+
+
+    end
+  end
+
+
+  private
+  
+  def normal_items(item)
+    if item.name != "Sulfuras, Hand of Ragnaros"
+      item.sell_in = item.sell_in - 1
     end
   end
 end
+
+
 
 class Item
   attr_accessor :name, :sell_in, :quality
@@ -72,7 +104,7 @@ class Item
     @quality = quality
   end
 
-  # def to_s()
-  #   "#{@name}, #{@sell_in}, #{@quality}"
-  # end
+  def to_s()
+    "#{@name}, #{@sell_in}, #{@quality}"
+  end
 end
