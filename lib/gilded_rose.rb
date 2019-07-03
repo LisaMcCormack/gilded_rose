@@ -5,8 +5,6 @@ class GildedRose
   end
 
   def update_quality()
-
-# SET UP LINTER ETC
 # REMEMBER TO ADD IN NEW REQUIREMENTS
 
     # If the item is not Brie, Backstage passes or Sulfuras and the quality is greater than zero
@@ -19,7 +17,7 @@ class GildedRose
           end
         end
       else
-      # this will increase the item quality by one if the item quality is less than 50
+      # this will increase the item qualities of Brie, Backstage passes by one if the item quality is less than 50
       # the quality for backstage passes increases by at least one depending on the sell_in number
         if item.quality < 50
           item.quality = item.quality + 1
@@ -41,7 +39,7 @@ class GildedRose
       if item.name != "Sulfuras, Hand of Ragnaros"
         item.sell_in = item.sell_in - 1
       end
-      # after the sell_in, the items decrease twice as fast except for Brie, backstage passes and sulfuras
+      # after the sell_in, the items quality decreases twice as fast except for Brie, backstage passes and sulfuras
       if item.sell_in < 0
         if item.name != "Aged Brie"
           if item.name != "Backstage passes to a TAFKAL80ETC concert"
@@ -50,11 +48,11 @@ class GildedRose
                 item.quality = item.quality - 1
               end
             end
-          # the backstage passes quality is zero after the sell_in
+          # the backstage passes quality is zero when the sell_in = -1
           else
             item.quality = item.quality - item.quality
           end
-        # brie further increases in quality - NEED TO CHECK THIS
+        # brie further increases in quality after the sell_in date has passed
         else
           if item.quality < 50
             item.quality = item.quality + 1
@@ -74,7 +72,7 @@ class Item
     @quality = quality
   end
 
-  def to_s()
-    "#{@name}, #{@sell_in}, #{@quality}"
-  end
+  # def to_s()
+  #   "#{@name}, #{@sell_in}, #{@quality}"
+  # end
 end
