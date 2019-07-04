@@ -12,13 +12,18 @@ I then started writing tests until coverage reached 100%.  After writing one tes
 
 ![alt text](./images/testcoverage.png)
 
+I started deleting old code and writing new methods.  Soon every single test was failing.  But after a while rspec started to look like this:
 
-One thing I am aware of is that although I have 100% test coverage, this does not mean I have tested for all evenualities so even if I refactor and all tests pass, I should write more tests and look for ways to prove I'm wrong.  
-
-
-Now to start refactoring.
+![alt text](./images/manyfails.png)
 
 
-![alt text](./images/testcoverage.png)
+and then finally it looked like this!
 
-I have written a method but I have failing tests and I'm not sure why because the code looks correct to me.  Using irb, I can see that the code is giving me the correct output so there must be a problem with the test.
+![alt text](./images/yay.png)
+
+IRB helped me to feature test and really helped with debugging.
+
+![alt text](./images/irb.png)
+
+
+If I had more time I would write more tests and look for ways to prove I'm wrong as in all honesty I don't think I have covered all edge cases.  I would also mock the Item class in the GildedRose unit tests.
