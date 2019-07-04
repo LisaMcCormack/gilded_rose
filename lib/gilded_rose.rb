@@ -1,98 +1,51 @@
 class GildedRose
 
+  SPECIAL_ITEMS = ["Aged Brie", "Backstage passes to a TAFKAL80ETC concert", "Sulfuras, Hand of Ragnaros" ]
+
   def initialize(items)
     @items = items
   end
 
   def update_quality()
-# REMEMBER TO ADD IN NEW REQUIREMENTS
-
-
-
-
-    # If the item is not Brie, Backstage passes or Sulfuras and the quality is greater than zero
-    # then item quality decreases by one.
     @items.each do |item|
-
-      normal_items(item)
-      if item.name != "Aged Brie" && item.name != "Backstage passes to a TAFKAL80ETC concert"
-        if item.quality > 0
-          if item.name != "Sulfuras, Hand of Ragnaros"
-            item.quality = item.quality - 1
-          end
-        end
-      else
-      # this will increase the item qualities of Brie, Backstage passes by one if the item quality is less than 50
-      # the quality for backstage passes increases by at least one depending on the sell_in number
-        if item.quality < 50
-          item.quality = item.quality + 1
-          if item.name == "Backstage passes to a TAFKAL80ETC concert"
-            if item.sell_in < 11
-              if item.quality < 50
-                item.quality = item.quality + 1
-              end
-            end
-            if item.sell_in < 6
-              if item.quality < 50
-                item.quality = item.quality + 1
-              end
-            end
-          end
-        end
-      end
-
-
-
-
-
-      # the sell_in number for all items decreases by one except for sulfuras
-
-
-
-
-
-      # after the sell_in, the items quality decreases twice as fast except for Brie, backstage passes and sulfuras
-      if item.sell_in < 0
-        if item.name != "Aged Brie"
-          if item.name != "Backstage passes to a TAFKAL80ETC concert"
-            if item.quality > 0
-              if item.name != "Sulfuras, Hand of Ragnaros"
-                item.quality = item.quality - 1
-              end
-            end
-          # the backstage passes quality is zero when the sell_in = -1
-          else
-            item.quality = item.quality - item.quality
-          end
-        # brie further increases in quality after the sell_in date has passed
-        else
-          if item.quality < 50
-            item.quality = item.quality + 1
-          end
-        end
-
-
-
-
-
-      end
-
-
-
-
+      normal_items_sell_in(item)
+      normal_items_quality(item) if normal_items?(item.name)
+      brie(item) if item.name == "Aged Brie"
+      backstage_passes(item) if item.name == "Backstage passes to a TAFKAL80ETC concert"
     end
   end
 
 
   private
-  
-  def normal_items(item)
+
+  def normal_items_sell_in(item)
     if item.name != "Sulfuras, Hand of Ragnaros"
-      item.sell_in = item.sell_in - 1
+      item.sell_in -= 1
     end
   end
-end
 
+  def normal_items_quality(item)
+    if item.quality > 0
+      item.sell_in > 0 ?  item.quality -= 1 : item.quality -= 2
+    end
+  end
+
+  def brie(item)
+    item.sell_in >= 0 ? item.quality += 1 : item.quality += 2
+  end
+
+  def normal_items?(item)
+    !SPECIAL_ITEMS.include?(item)
+  end
+
+
+  def backstage_passes(item)
+    item.quality += 1 if item.sell_in > 10
+    item.quality += 2 if item.sell_in < 11 && item.sell_in > 5
+    item.quality += 3 if item.sell_in < 6 && item.quality <= 47
+    item.quality = 0 if item.sell_in < 0
+  end
+end
 
 
 class Item

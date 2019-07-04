@@ -21,6 +21,12 @@ describe GildedRose do
       expect(items[0].sell_in).to eq 19
     end
 
+    it "decreases the quality by two of all items except Brie, Backstage passes and Sulfuras when sell_in is negative" do
+      items = [Item.new("foo", -1, 10)]
+      GildedRose.new(items).update_quality()
+      expect(items[0].quality).to eq 8
+    end
+
     it "never allows the quality to be negative" do
       items = [Item.new("foo", 0, 0)]
       GildedRose.new(items).update_quality()
@@ -46,13 +52,13 @@ describe GildedRose do
     end
 
     it "will increase the quality of backstage pass by one if sell in is 11 or more" do
-      items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 11, 40)]
+      items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 12, 40)]
       GildedRose.new(items).update_quality()
       expect(items[0].quality).to eq 41
     end
 
     it "will increase the quality of backstage pass by two if sell in is between 10 and 6" do
-      items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 6, 40)]
+      items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 9, 40)]
       GildedRose.new(items).update_quality()
       expect(items[0].quality).to eq 42
     end
@@ -64,7 +70,7 @@ describe GildedRose do
     end
 
     it "will increase the quality of brie by one when sell_in is zero or positive" do
-      items = [Item.new("Aged Brie", 0, 49)]
+      items = [Item.new("Aged Brie", 1, 49)]
       GildedRose.new(items).update_quality()
       expect(items[0].quality).to eq 50
     end

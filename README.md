@@ -18,8 +18,7 @@ One thing I am aware of is that although I have 100% test coverage, this does no
 
 Now to start refactoring.
 
-Things may look worse before they look better.  After much staring at the code, I decided to move a small section into a private method that shouldn't disrupt things too much:
 
-![alt text](./images/private.png)
+![alt text](./images/testcoverage.png)
 
-Two tests now fail, not too bad.  
+I have written a method but I have failing tests and I'm not sure why because the code looks correct to me.  Using irb, I can see that the code is giving me the correct output so there must be a problem with the test.
