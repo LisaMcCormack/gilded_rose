@@ -1,6 +1,6 @@
 class GildedRose
 
-  SPECIAL_ITEMS = ["Aged Brie", "Backstage passes to a TAFKAL80ETC concert", "Sulfuras, Hand of Ragnaros" ]
+  SPECIAL_ITEMS = ["Aged Brie", "Backstage passes to a TAFKAL80ETC concert", "Sulfuras, Hand of Ragnaros", "Conjured"]
 
   def initialize(items)
     @items = items
@@ -12,6 +12,7 @@ class GildedRose
       normal_items_quality(item) if normal_items?(item.name)
       brie(item) if item.name == "Aged Brie"
       backstage_passes(item) if item.name == "Backstage passes to a TAFKAL80ETC concert"
+      conjured(item) if item.name == "Conjured"
     end
   end
 
@@ -22,6 +23,10 @@ class GildedRose
     if item.name != "Sulfuras, Hand of Ragnaros"
       item.sell_in -= 1
     end
+  end
+
+  def conjured(item)
+    item.quality -= 2 if item.quality > 1
   end
 
   def normal_items_quality(item)
