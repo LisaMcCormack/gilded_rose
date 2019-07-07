@@ -15,20 +15,17 @@ To plan how I was going to write the new methods took a lot of modelling, I wrot
 
 ![alt text](./images/modelling.png)
 
-I started deleting old code and writing new methods.  Soon all tests were failing.  But after a while rspec started to look like this:
-
-![alt text](./images/manyfails.png)
-
-
-and then finally it looked like this!
-
-![alt text](./images/yay.png)
-
-IRB helped me to feature test and really helped with debugging.
+I started refactoring the code. IRB helped me to feature test and really helped with debugging.
 
 ![alt text](./images/irb.png)
 
-After refactoring the code, I then added in the new item "Conjured".  This is an item that degrades twice as fast as other items.  First I wrote the test.  Then I added "Conjured" to the constant variable SPECIAL ITEMS array.  Then I wrote the method and ran rspec, and the test passes!
+The end result with all tests passing:
+
+![alt text](./images/yay.png)
+
+
+
+Lastly I added in the new item "Conjured".  This is an item that degrades twice as fast as other items.  First I wrote the test.  Then I added "Conjured" to the constant variable SPECIAL ITEMS array.  Then I wrote the method and ran rspec, and the test passes!
 I'm happy with my code because adding the new item was pretty easy and my methods obey the single responsibility principle.  
 
 
